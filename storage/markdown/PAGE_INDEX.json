@@ -1,0 +1,47 @@
+[
+  {
+    "id": "knowledge/technical_guidelines.md#technical-architecture-guidelines",
+    "title": "Technical Architecture Guidelines",
+    "file": "knowledge/technical_guidelines.md",
+    "level": 1,
+    "heading_path": "Technical Guidelines > Technical Architecture Guidelines",
+    "summary": "date: 2026-10-29 tags: architecture, crate-motor, reasoning, engineering",
+    "tokens": 25
+  },
+  {
+    "id": "knowledge/technical_guidelines.md#crate-motor-design-principles",
+    "title": "Crate Motor Design Principles",
+    "file": "knowledge/technical_guidelines.md",
+    "level": 2,
+    "heading_path": "Technical Guidelines > Technical Architecture Guidelines > Crate Motor Design Principles",
+    "summary": "A crate motor is a drop-in component that requires zero external setup. The engine must be completely self-contained within its repo folder, including its physi...",
+    "tokens": 47
+  },
+  {
+    "id": "knowledge/technical_guidelines.md#reasoning-modes--plusiq-protocol-",
+    "title": "Reasoning Modes (plusIQ Protocol)",
+    "file": "knowledge/technical_guidelines.md",
+    "level": 2,
+    "heading_path": "Technical Guidelines > Technical Architecture Guidelines > Reasoning Modes (plusIQ Protocol)",
+    "summary": "Fleece Gamma uses Qwen 3.5 9B (8.95B) The Defiant Fable Uncensored Heretic plusIQ-TOOLS (Q6_K MTP) with 10 switchable modes: - Reasoning modes (with compacted `...",
+    "tokens": 116
+  },
+  {
+    "id": "knowledge/technical_guidelines.md#ingestion-protocol-specifications",
+    "title": "Ingestion Protocol Specifications",
+    "file": "knowledge/technical_guidelines.md",
+    "level": 2,
+    "heading_path": "Technical Guidelines > Technical Architecture Guidelines > Ingestion Protocol Specifications",
+    "summary": "The ingestion engine strictly adheres to three unbreakable protocols: 1. Anti-Parsing: Preserves raw markdown tables, syntax trees, and indentation. 2. Anti-Chu...",
+    "tokens": 77
+  },
+  {
+    "id": "knowledge/technical_guidelines.md#context-budget-limits",
+    "title": "Context Budget Limits",
+    "file": "knowledge/technical_guidelines.md",
+    "level": 2,
+    "heading_path": "Technical Guidelines > Technical Architecture Guidelines > Context Budget Limits",
+    "summary": "The default working context is set to 16,384 tokens (expandable up to 262,144 native tokens). When memory usage exceeds 85% of capacity, the engine triggers aut...",
+    "tokens": 79
+  }
+]
