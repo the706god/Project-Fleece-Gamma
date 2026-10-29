@@ -86,8 +86,14 @@ Last Updated: {datetime.datetime.now().isoformat()}
         if not sanitized_res:
             sanitized_res = response.strip()
 
-        paragraphs = [p.strip() for p in sanitized_res.split("\n\n") if p.strip()]
-        clean_ans = " ".join(paragraphs[:2]) if paragraphs else sanitized_res
+        paragraphs = [
+            p.strip()
+            for p in sanitized_res.split("\n\n")
+            if p.strip()
+            and not p.strip().startswith("### [Source:")
+            and not p.strip().lower().startswith("based on the ingested knowledge")
+        ]
+        clean_ans = " ".join(paragraphs[:3]) if paragraphs else sanitized_res
         clean_ans = clean_ans.replace("\n", " ")
         sources = ", ".join(source_refs) if source_refs else "Deep Knowledge Retrieval"
 
