@@ -58,6 +58,7 @@ python test_sieve_ocr.py
 
 ### 3. Use inside the interactive shell
 
+- `!audit /path/to/skill` — audit an agent or skill for sovereign Fleece compatibility.
 - `!ocr /path/to/document.pdf` — ingest a PDF or image via the Mimir 3-Pass Progressive Optical Sieve.
 - `!mode <name>` — switch active reasoning mode (`spoon`, `einstein`, `xhigh`, `medium`, `low`, `ispoon`, `ieinstein`, `ixhigh`, `imedium`, `ilow`).
 - `!think` — inspect the internal `<think>...</think>` reasoning trace from the previous turn.
@@ -77,3 +78,22 @@ motor.ingest_document("contract_scan.pdf")
 response = motor.execute("Audit the contract clauses and cite normalized bounding boxes.")
 print(response)
 ```
+
+---
+
+## Auditing Frontier Agents & Skills (`AUDIT_PLAYBOOK.md`)
+
+Fleece includes an automated compatibility auditor to evaluate whether skills and agents designed for Frontier platforms (OpenAI, Claude, Antigravity, LangChain, CrewAI) can run sovereignly on Fleece SLM Crate Motors.
+
+```bash
+# Audit any agent script, prompt, or skill folder:
+./audit_agent.py /path/to/my_skill/
+
+# Generate Markdown audit report:
+./audit_agent.py /path/to/my_skill/ --format markdown --output AUDIT_REPORT.md
+
+# Audit directly from the interactive shell:
+[You] > !audit /path/to/my_skill
+```
+
+See [`AUDIT_PLAYBOOK.md`](AUDIT_PLAYBOOK.md) for the complete 6-Pillar Audit Rubric and platform-by-platform conversion instructions.
