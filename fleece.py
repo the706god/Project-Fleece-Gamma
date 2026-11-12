@@ -126,7 +126,7 @@ class FleeceCrateMotor:
         self.store_knowledge(
             topic=doc_topic,
             content=md_payload,
-            tags=["mimir-ocr", "sieve-ocr", f"sha256:{doc_res.sha256_hash[:12]}"],
+            tags=["mimir-ocr", "sieve-ocr", f"sha256:{doc_res.sha256_hash}"],
         )
         return doc_res
 

@@ -141,7 +141,7 @@ class ContextBudgetManager:
                 except Exception as e:
                     logger.error("Failed to archive evicted turns: %s", e)
 
-            condensed = " ".join([f"[{m['role']}] {m['content'][:90]}..." for m in evicted_turns])
+            condensed = " ".join([f"[{m['role']}] {m['content']}" for m in evicted_turns])
             self.active_summary = f"[Conversation Archive: {condensed}]"
             return True
 

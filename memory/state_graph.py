@@ -222,8 +222,8 @@ class StateGraphMemoryEngine:
     def _node_archive(self, state: GraphState):
         record = (
             f"**Mode:** `{{REASON:{state.reasoning_mode}}}`\n"
-            f"**User:** {state.clean_query[:100]}...\n"
-            f"**Assistant:** {state.clean_answer[:120]}...\n"
+            f"**User:** {state.clean_query}\n"
+            f"**Assistant:** {state.clean_answer}\n"
         )
         if state.is_fast_path_hit:
             record += f"**Cache Hit:** {state.fast_path_source}\n"
