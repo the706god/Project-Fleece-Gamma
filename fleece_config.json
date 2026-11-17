@@ -1,12 +1,18 @@
 {
   "project_name": "Project: Fleece Gamma",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "model_type": "reasoning-slm",
-  "base_model": "Qwen 3.5 9B (8.95B) The Defiant Fable Uncensored Heretic plusIQ TOOLS NEO MAX MTP",
-  "model_path": "models/Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-plusIQ-TOOLS-NEO-MAX-MTP-Q6_K.gguf",
+  "base_model": "Qwen 3.5 9B Instruct",
+  "model_path": "models/model.gguf",
   "engine": {
-    "n_ctx": 16384,
+    "n_ctx": 65536,
     "n_gpu_layers": -1,
+    "flash_attn": true,
+    "kv_cache_type_k": "turbo4",
+    "kv_cache_type_v": "turbo4",
+    "kv_fallback_type": "q8_0",
+    "turbo_sparse_v": true,
+    "turbo_auto_asymmetric": true,
     "temperature": 0.6,
     "top_p": 0.95,
     "top_k": 20,
@@ -14,7 +20,7 @@
     "default_reasoning_mode": "einstein"
   },
   "memory": {
-    "max_context_tokens": 16384,
+    "max_context_tokens": 65536,
     "reserved_completion_tokens": 4096,
     "system_anchor_tokens": 1200,
     "memory_compaction_threshold": 0.85,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Project: Fleece Gamma - The 'Crate Motor' SLM Build (Reasoning Edition)
-Model: Qwen 3.5 9B (8.95B) The Defiant Fable Uncensored Heretic plusIQ-TOOLS NEO MAX MTP (Q6_K)
+Model: Qwen 3.5 9B Instruct with Native TurboQuant (turbo4/turbo4)
 Equipped with Mimir OCR (3-Pass Progressive Optical Sieve + Vectorless Memory System):
 - Mimir 3-Pass Progressive Optical Sieve with Coordinate Delta-Masking (sieve_ocr.py)
 - Switchable plusIQ Reasoning Modes ({REASON:spoon}, {REASON:einstein}, {REASON:xhigh}, {REASON:medium}, {REASON:low})

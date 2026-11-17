@@ -15,29 +15,25 @@ import http.cookiejar
 MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
 
 MODEL_CONFIG = {
-    "filename": "Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-plusIQ-TOOLS-NEO-MAX-MTP-Q6_K.gguf",
+    "filename": "Qwen3.5-9B_TQ-Q8_0.gguf",
     "alias": "model.gguf",
-    "gdrive_id": "1qMM47l-NpSYwZwxwz71D-oNYlr4bA1Wr",
-    "fallback_url": (
-        "https://huggingface.co/DavidAU/"
-        "Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF/"
-        "resolve/main/Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-plusIQ-TOOLS-NEO-MAX-MTP-Q6_K.gguf"
-    ),
-    "min_bytes": 5_000_000_000,
+    "gdrive_id": "1k_qwen35_9b_placeholder",
+    "fallback_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q8_0.gguf",
+    "min_bytes": 7_500_000_000,
 }
 
 MIMIR_OCR_MODELS = [
     {
-        "filename": "MiniCPM-V-2.6-Q4_0.gguf",
-        "gdrive_id": "1iYN45Gfyeez0cY7vHAVUxtT6c2hr8j4A",
-        "fallback_url": "https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/resolve/main/ggml-model-Q4_0.gguf",
-        "min_bytes": 3_500_000_000,
+        "filename": "chandra-ocr-2.Q6_K.gguf",
+        "gdrive_id": "1jL_chandra_placeholder",
+        "fallback_url": "https://huggingface.co/unsloth/chandra-ocr-2-GGUF/resolve/main/chandra-ocr-2.Q6_K.gguf",
+        "min_bytes": 3_000_000_000,
     },
     {
-        "filename": "MiniCPM-V-2.6-mmproj-f16.gguf",
-        "gdrive_id": "1xV1iwTb7jtLR6n4pKZwdNAUKLiYge9sc",
-        "fallback_url": "https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf/resolve/main/mmproj-model-f16.gguf",
-        "min_bytes": 800_000_000,
+        "filename": "chandra-ocr-2.mmproj-f16.gguf",
+        "gdrive_id": "1kL_chandra_mmproj_placeholder",
+        "fallback_url": "https://huggingface.co/unsloth/chandra-ocr-2-GGUF/resolve/main/chandra-ocr-2.mmproj-f16.gguf",
+        "min_bytes": 500_000_000,
     },
 ]
 
