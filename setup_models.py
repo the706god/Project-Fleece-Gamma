@@ -17,7 +17,7 @@ MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
 MODEL_CONFIG = {
     "filename": "Qwen3.5-9B_TQ-Q8_0.gguf",
     "alias": "model.gguf",
-    "gdrive_id": "1k_qwen35_9b_placeholder",
+    "gdrive_id": "1shbprffvEzpp1b8uBo6u9RlZ3ZX3d1KX",
     "fallback_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q8_0.gguf",
     "min_bytes": 7_500_000_000,
 }
@@ -25,13 +25,13 @@ MODEL_CONFIG = {
 MIMIR_OCR_MODELS = [
     {
         "filename": "chandra-ocr-2.Q6_K.gguf",
-        "gdrive_id": "1jL_chandra_placeholder",
+        "gdrive_id": "14UOJius5rgg5mxjv__EwY86Q0wS8_q4a",
         "fallback_url": "https://huggingface.co/unsloth/chandra-ocr-2-GGUF/resolve/main/chandra-ocr-2.Q6_K.gguf",
         "min_bytes": 3_000_000_000,
     },
     {
         "filename": "chandra-ocr-2.mmproj-f16.gguf",
-        "gdrive_id": "1kL_chandra_mmproj_placeholder",
+        "gdrive_id": "1bzLtTzpX9kwhEMbvoxWGF6izmTfGOfTo",
         "fallback_url": "https://huggingface.co/unsloth/chandra-ocr-2-GGUF/resolve/main/chandra-ocr-2.mmproj-f16.gguf",
         "min_bytes": 500_000_000,
     },
