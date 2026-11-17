@@ -21,13 +21,13 @@ Project Fleece Gamma was built to fix that. It is your local reasoning crate mot
 
 ## What Fleece Gamma Is Designed For
 
-Fleece Gamma is the deep thinker of the Fleece suite. It is designed for tasks where speed is less important than getting the logic 100% right.
+Fleece Gamma is the deep thinker of the Fleece suite. It is designed for tasks where speed matters less than walking through hard logic step by step.
 
-Unlike standard text models that guess the next word immediately, Fleece Gamma stops and thinks before it answers. It writes out a hidden scratchpad of logic, tests different angles, catches its own mistakes, and only outputs the verified final answer.
+Unlike standard text models that guess the next word immediately, Fleece Gamma stops and thinks before it answers. It writes out a hidden scratchpad of logic, tests different angles, catches its own mistakes, and then outputs a clear final answer.
 
 ### Updated Technical Specs
 
-- Brain: Qwen 3.5 9B Instruct running at full Q8_0 precision. We removed uncensored fantasy finetunes to guarantee rock-solid adherence to facts, business rules, and strict instructions.
+- Brain: Qwen 3.5 9B Instruct running at full Q8_0 precision. We removed uncensored fantasy finetunes to keep instruction following and factual output tight and predictable.
 - Switchable plusIQ Reasoning: Switch between 10 different thinking depths on the fly:
   - Deep Research Mode (`{REASON:spoon}`): Ponders deeply for maximum thoroughness on hard problems.
   - Multi-Perspective Mode (`{REASON:einstein}`): Analyzes complex arguments from multiple viewpoints before deciding.
@@ -54,19 +54,19 @@ Most AI tools use messy vector databases that chop long legal documents and rule
 
 ---
 
-## How Fleece Reads: The Mimir 3-Pass Sieve
+## Bonus Feature: Mimir OCR
 
-To audit real-world records, an AI must read scanned paperwork with extreme precision. Fleece Gamma includes the Mimir 3-Pass Progressive Optical Sieve:
+Most local reasoning tools force you to build your own document pipeline before you can feed them a single real-world file. We packaged **Mimir OCR**—the proprietary OCR stack from our upcoming **MimirOS** release—directly into Fleece Gamma so you get a complete, multi-purpose local AI tool right out of the box.
 
-1. Pass 1 (Instant System Reading): Uses built-in macOS or Windows reading engines to capture clean, printed text in less than a tenth of a second per page with zero memory overhead.
-2. Pass 2 (Targeted Cleanup): The system reviews its own work. If fine print, stamps, or dense tables score below 85% confidence, it crops only that tiny box and re-reads it with RapidOCR.
-3. Pass 3 (Chandra-OCR-2 Fallback): For hard-to-read cursive handwriting, degraded copies, or complex multi-column forms, Fleece activates an in-process specialist vision reader (Chandra-OCR-2). It sleeps when not needed, keeping your memory completely free for deep reasoning.
+How you use it is completely up to you. Whether your workflow touches medical, legal, financial, administrative, or everyday files, Mimir OCR is built to read whatever documents and forms you feed it with fidelity and accuracy—offline and under your control.
+
+Under the hood, it runs a 3-pass pipeline (OS-native reading first, RapidOCR on low-confidence boxes, and a sleeping Chandra-OCR-2 fallback only for tough scans) without chopping or cutting off your pages. Combined with Fleece Gamma's portable deep reasoning, you can read tough paperwork offline and walk through complex logic on your own machine anywhere in the world.
 
 ---
 
 ## Real-World Possibilities (Industry-Agnostic)
 
-You do not need to be a software engineer to get enormous value out of Fleece Gamma. Here are practical ways people use it:
+You control what documents you check and how you use the results. You do not need to be a software engineer to get practical value out of Fleece Gamma:
 
 - Contract and Policy Cross-Auditing: Feed in a 50-page employee handbook, supplier agreement, or lease. Gamma checks step by step if clause 12 contradicts clause 47, highlighting the exact page and sentence.
 - Multi-Document Business Rule Verification: Provide a purchase order, a shipping receipt, and a billing invoice. Gamma verifies line by line whether quantities match, math adds up, and payment terms comply with company rules.
