@@ -1,99 +1,163 @@
-# Project: Fleece Gamma 🐑🧠
+# Project: Fleece Gamma
 
-**The "Crate Motor" SLM build (Reasoning Edition)** — a self-contained, uncensored reasoning AI model equipped with **Mimir OCR** that you run **completely offline, on your own machine**. No internet needed.
+The Crate Motor AI Build (Reasoning Edition) — a deep-thinking, private AI model that reasons through hard problems step by step directly on your own computer. Once set up, it requires zero internet connection and sends zero data to the cloud.
 
-**Core model:** Qwen 3.5 9B (`8.95B` parameters) The Defiant Fable Uncensored Heretic plusIQ-TOOLS NEO MAX MTP (`Q6_K` GGUF, bundled inside `models/`)
-**Ingestion & Memory Stack:** **Mimir OCR** (3-Pass Progressive Optical Sieve with Coordinate Delta-Masking + Two-Tier Vectorless Memory)
-
----
-
-## What "local reasoning agent" means here
-
-Fleece Gamma is a **tool for offloading deep analytical, mathematical, architectural, and document reasoning from frontier (cloud) agents so it can live locally**. You give it a task or a degraded multi-page PDF/scan, **Mimir OCR** extracts and grounds every text block to normalized `[x0, y0, x1, y1]` coordinates, and the engine reasons step-by-step using compacted `<think>...</think>` blocks via 10 switchable `plusIQ` modes — all without calling anything to a server.
-
-- **No internet required.** Everything runs locally, with the physical `8.16 GB` GGUF model bundled directly inside `models/`.
-- **No cloud API keys.** No `OPENAI_API_KEY`, no `ANTHROPIC_API_KEY`, no AWS Textract.
-- **Mimir OCR Stack.** Combines the **3-Pass Progressive Optical Sieve with Coordinate Delta-Masking** (`sieve_ocr.py`) and the **Two-Tier Vectorless Memory System** (`DOSSIER.md` L1 + `PAGE_INDEX.json` L2). Zero embeddings, zero chunking.
-- **Dynamic Reasoning Depth (`plusIQ`).** Switch on the fly between deep research reasoning (`{REASON:spoon}`), multi-perspective analytical reasoning (`{REASON:einstein}`), standard reasoning (`xhigh`, `medium`, `low`), or zero-thinking instant instruct modes (`ispoon`, `ieinstein`, `ixhigh`, `imedium`, `ilow`).
-- **Self-contained.** Everything the project needs sits in one folder.
+Core Model: Qwen 3.5 9B Instruct (Full Q8_0 Precision)
+Reasoning Modes: 10 Switchable plusIQ Modes with Automatic Thought-Stripping
+Memory & Acceleration: Native Metal TurboQuant (turbo4/turbo4) with 65,536-token context capacity
+Document Stack: Mimir OCR (3-Pass Progressive Optical Sieve) + Two-Tier Vectorless Memory System
 
 ---
 
-## What's inside the crate
+## Why Fleece Exists: Stop Hiring a Top Lawyer to Check Checkboxes
 
-1. **GGUF Reasoning SLM core (`engine/llm_engine.py`)** — pre-configured for Apple Silicon (Metal), NVIDIA (CUDA), or CPU fallback, with native `plusIQ` mode switching and `<think>...</think>` trace extraction.
-2. **Bundled Physical Model (`models/`)**
-   - `Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-plusIQ-TOOLS-NEO-MAX-MTP-Q6_K.gguf` (`8.16 GB` physical file + local `model.gguf` alias).
-3. **Mimir OCR (`sieve_ocr.py` & `memory/`)**
-   - **3-Pass Progressive Optical Sieve with Coordinate Delta-Masking (`engine/sieve_ocr.py`):**
-     - **Pass 1 (OS-Native OCR):** Apple Vision / Windows OCR clears ~85% of clean text in `<150ms/page`.
-     - **Coordinate Delta-Masking:** Locks in `>= 0.85` confidence blocks and crops only `< 0.85` bounding boxes (`12px` margin at `200 DPI`).
-     - **Pass 2 (Targeted `RapidOCR` ONNX):** Runs on delta-masked sub-crops (~12%: faded print, stamps, tables) and projects coordinates back to full-page `[0.0000, 1.0000]` space.
-     - **Pass 3 (In-Process Local VLM via `MiniCPM-V 2.6`):** Escalates stubborn cursive/marginalia crops (~3%) at `temperature=0.0` with Gate 3 quarantine (`needs_human_review = True` if `< 0.85` or `[?]`).
-   - **Tier 1 — Mimir Living Dossier (`DOSSIER.md`):** a fast-path cache. Frequently asked questions and verified answers are served instantly (with internal `<think>` traces stripped so the cache stays pure).
-   - **Tier 2 — Mimir Vectorless PageIndex (`PAGE_INDEX.json`):** a plain table-of-contents tree over the markdown knowledge files. Zero embeddings, zero chunking.
-4. **Reasoning-aware context safeguard (`memory/context_budget.py`)** — reserves dedicated completion headroom (`4,096` tokens) for chain-of-thought reasoning, strips historical `<think>` traces from prior turns so multi-turn chats never bloat the context window, and offloads older conversation first to keep ingested documents intact.
-5. **Ingestion protocols (`ingestion/protocols.py`)** — three guarantees:
-   - **Anti-Parsing:** raw text is never rewritten or reformatted.
-   - **Anti-Chunking:** documents are treated as complete wholes.
-   - **Anti-Truncating:** content is never cut off mid-sentence.
+Frontier reasoning models like OpenAI o1/o3, Claude Extended Thinking, and Gemini Thinking are amazing. But using them for everyday work is like hiring a five-hundred-dollar-an-hour lawyer just to make sure people checked every box on a paper form.
+
+The biggest waste of money in AI today is not one giant math problem. It is having background agents constantly checking rules, auditing documents, cross-referencing lists, and verifying multi-step procedures on expensive cloud systems. Every single thinking token burns through your rate limits and spikes your monthly invoice.
+
+Project Fleece Gamma was built to fix that. It is your local reasoning crate motor. You offload deep logic audits, compliance reviews, and multi-step rule checking to your own computer. You get unlimited deep reasoning for zero dollars per month, zero token bills, zero rate limits, and 100% privacy. You save your expensive cloud models for the rare, world-changing strategies that actually need them.
 
 ---
 
-## Quickstart
+## What Fleece Gamma Is Designed For
 
-### 1. Verify the bundled models (optional)
+Fleece Gamma is the deep thinker of the Fleece suite. It is designed for tasks where speed is less important than getting the logic 100% right.
+
+Unlike standard text models that guess the next word immediately, Fleece Gamma stops and thinks before it answers. It writes out a hidden scratchpad of logic, tests different angles, catches its own mistakes, and only outputs the verified final answer.
+
+### Updated Technical Specs
+
+- Brain: Qwen 3.5 9B Instruct running at full Q8_0 precision. We removed uncensored fantasy finetunes to guarantee rock-solid adherence to facts, business rules, and strict instructions.
+- Switchable plusIQ Reasoning: Switch between 10 different thinking depths on the fly:
+  - Deep Research Mode (`{REASON:spoon}`): Ponders deeply for maximum thoroughness on hard problems.
+  - Multi-Perspective Mode (`{REASON:einstein}`): Analyzes complex arguments from multiple viewpoints before deciding.
+  - Standard Thinking Modes (`xhigh`, `medium`, `low`): Balances reasoning depth with speed.
+  - Instant Instruct Modes (`ispoon`, `ieinstein`, `ixhigh`, `imedium`, `ilow`): Turns off the scratchpad for lightning-fast standard answers.
+- Clean Memory Traces: The engine automatically cleans away temporary scratchpad thoughts (`<think>...</think>`) before saving facts to your memory. Your permanent notes stay clean and your workspace never clogs up.
+- TurboQuant KV Cache: Uses high-efficiency 4-bit memory packing (turbo4/turbo4). This cuts memory usage by nearly four times and unlocks a huge 65,536-token workspace on your local machine.
+- Memory Fallback Guard: If run on an older machine without TurboQuant, it smoothly steps down to standard q8_0 memory instead of crashing.
+- Dedicated Thinking Room: Automatically reserves 4,096 tokens of dedicated thinking space so complex answers never get cut off mid-thought.
+- Zero-Destruction Guarantee: Fleece strictly protects your source documents:
+  1. Anti-Parsing: Raw text and rule clauses are never scrambled or changed.
+  2. Anti-Chunking: Documents are kept whole, never chopped into loose paragraphs.
+  3. Anti-Truncating: Information is never cut off mid-sentence.
+
+---
+
+## How Fleece Remembers: Two-Tier Vectorless Memory
+
+Most AI tools use messy vector databases that chop long legal documents and rulebooks into disconnected snippets, losing the overall context. Fleece Gamma uses a clean, unbroken two-tier memory system:
+
+- Tier 1 Memory (Fast Working Memory — The Living Dossier): This is your agent's verified fact book. When Gamma solves a hard logic puzzle or verifies a compliance question, it writes the clean result into `DOSSIER.md`. Next time you ask, it serves the answer immediately without having to re-think the whole problem.
+- Tier 2 Memory (Book Index Navigation — The PageIndex Tree): Instead of guessing where rules live, Fleece builds a structured table-of-contents tree in `PAGE_INDEX.json`. Gamma navigates directly to the exact page, section, and line number of every requirement, just like a human auditor using a book index.
+- Cold Backup (Secondary Markdown Store): Every ingested document is permanently preserved as clean, whole Markdown files on your local drive.
+
+---
+
+## How Fleece Reads: The Mimir 3-Pass Sieve
+
+To audit real-world records, an AI must read scanned paperwork with extreme precision. Fleece Gamma includes the Mimir 3-Pass Progressive Optical Sieve:
+
+1. Pass 1 (Instant System Reading): Uses built-in macOS or Windows reading engines to capture clean, printed text in less than a tenth of a second per page with zero memory overhead.
+2. Pass 2 (Targeted Cleanup): The system reviews its own work. If fine print, stamps, or dense tables score below 85% confidence, it crops only that tiny box and re-reads it with RapidOCR.
+3. Pass 3 (Chandra-OCR-2 Fallback): For hard-to-read cursive handwriting, degraded copies, or complex multi-column forms, Fleece activates an in-process specialist vision reader (Chandra-OCR-2). It sleeps when not needed, keeping your memory completely free for deep reasoning.
+
+---
+
+## Real-World Possibilities (Industry-Agnostic)
+
+You do not need to be a software engineer to get enormous value out of Fleece Gamma. Here are practical ways people use it:
+
+- Contract and Policy Cross-Auditing: Feed in a 50-page employee handbook, supplier agreement, or lease. Gamma checks step by step if clause 12 contradicts clause 47, highlighting the exact page and sentence.
+- Multi-Document Business Rule Verification: Provide a purchase order, a shipping receipt, and a billing invoice. Gamma verifies line by line whether quantities match, math adds up, and payment terms comply with company rules.
+- Complex Schedule and Project Conflict Checks: Ingest a detailed project schedule with multiple teams and deadlines. Gamma analyzes dependencies and spots hidden bottlenecks—such as two teams scheduled to use the same equipment on the same morning.
+- Multi-Step Standard Operating Procedure (SOP) Compliance: Check field reports against safety manuals to verify that every mandatory safety step was documented in the correct sequence.
+- Software Logic and Architecture Auditing: Review codebases and database rules to ensure user permissions are verified before sensitive customer records are modified.
+
+---
+
+## Ideal System Specifications
+
+Running a 9-billion parameter model at full Q8_0 precision with 65,536 tokens of memory requires a capable workstation:
+
+### Mac (Apple Silicon)
+- Best: Any Mac with M1 Pro, M1 Max, M2 Pro, M2 Max, M3 Pro, M3 Max, M4, or Mac Studio with 32 GB or more Unified Memory.
+- Minimum: Apple Silicon Mac with 16 GB Unified Memory (runs comfortably with shorter working documents).
+- Operating System: macOS 13 (Ventura) or later.
+
+### Windows PC
+- Best: 8-core modern CPU (Intel Core i7/i9 12th gen+ or AMD Ryzen 7/9) with 32 GB system RAM and an NVIDIA GPU (RTX 3080, 4070, 4080, 4090 with 12 GB+ VRAM).
+- Minimum: 8-core CPU with 32 GB system RAM (can run on CPU alone).
+- Operating System: Windows 10 or 11 (64-bit).
+
+### Linux
+- Best: Modern x86_64 or ARM64 workstation with 32 GB RAM and an NVIDIA GPU (CUDA support).
+- Minimum: 8-core modern CPU with 32 GB RAM.
+
+---
+
+## What to Expect for Response Speeds
+
+- On Apple Silicon Mac (M1 Pro / M2 / M3 32 GB): 18 to 32 words per second. Thoughtful, steady, and consistent. You will see it deliberate and then output clear, verified conclusions.
+- On Windows / Linux with NVIDIA GPU: 20 to 35 words per second.
+- On Standard CPU Only (No GPU): 5 to 10 words per second (best for background overnight jobs and deep audits).
+- Document Reading Speed (Mimir OCR): Less than 1 second per page for 85%+ of standard documents.
+
+---
+
+## Quickstart Guide
+
+### 1. Set Up the Environment
 
 ```bash
 python -m pip install -r requirements.txt
 python setup_models.py
 ```
 
-### 2. Run Mimir OCR Benchmark or Launch Shell
+### 2. Test Document Reading or Start the Shell
 
 ```bash
+# Run the built-in document reading test:
 python test_sieve_ocr.py
+
+# Launch the interactive terminal:
 ./run.sh
 ```
 
-### 3. Use inside the interactive shell
+### 3. Useful Commands Inside the Shell
 
-- `!audit /path/to/skill` — audit an agent or skill for sovereign Fleece compatibility.
-- `!ocr /path/to/document.pdf` — ingest a PDF or image via the Mimir 3-Pass Progressive Optical Sieve.
-- `!mode <name>` — switch active reasoning mode (`spoon`, `einstein`, `xhigh`, `medium`, `low`, `ispoon`, `ieinstein`, `ixhigh`, `imedium`, `ilow`).
-- `!think` — inspect the internal `<think>...</think>` reasoning trace from the previous turn.
-- `!dossier` — view the Mimir living dossier.
-- `!toc` — view the Mimir table-of-contents index.
-- `!budget` — check context token usage.
-- `!reset` — clear conversation turns, keep the model and memory.
+- `!audit /path/to/skill` — Check if an outside prompt or agent skill can run locally on Fleece Gamma.
+- `!ocr /path/to/file.pdf` — Read a document and store it in permanent, unbroken memory.
+- `!reason <mode>` — Change your reasoning mode (e.g., `!reason spoon`, `!reason einstein`, `!reason ispoon`).
+- `!dossier` — View your verified fact book.
+- `!toc` — View the document table of contents tree.
+- `!budget` — Check how much of your 65,536-token workspace is currently in use.
+- `!reset` — Clear active conversation turns while keeping all loaded documents intact.
 
-### 4. Run as a Python crate motor
+### 4. Use Inside Python Scripts
 
 ```python
 from fleece import FleeceCrateMotor
 
+# 1. Start the reasoning motor
 motor = FleeceCrateMotor()
-motor.set_reasoning_mode("einstein")
-motor.ingest_document("contract_scan.pdf")
-response = motor.execute("Audit the contract clauses and cite normalized bounding boxes.")
-print(response)
+
+# 2. Ingest compliance manuals or contracts
+motor.ingest_document("vendor_contract_2026.pdf")
+motor.ingest_document("company_procurement_policy.pdf")
+
+# 3. Ask for a multi-step logic audit
+query = "{REASON:einstein} Does section 4.2 of the vendor contract comply with our procurement payment policy?"
+answer = motor.execute(query)
+print(answer)
 ```
 
 ---
 
-## Auditing Frontier Agents & Skills (`AUDIT_PLAYBOOK.md`)
+## Auditing Outside Agents and Skills
 
-Fleece includes an automated compatibility auditor to evaluate whether skills and agents designed for Frontier platforms (OpenAI, Claude, Antigravity, LangChain, CrewAI) can run sovereignly on Fleece SLM Crate Motors.
+Fleece Gamma includes a built-in reasoning auditor. It evaluates external agent skills and prompt chains, verifying if they can be moved from cloud models (like OpenAI o1 or Claude Extended Thinking) to run offline on Gamma without losing logical rigor.
 
 ```bash
-# Audit any agent script, prompt, or skill folder:
-./audit_agent.py /path/to/my_skill/
-
-# Generate Markdown audit report:
-./audit_agent.py /path/to/my_skill/ --format markdown --output AUDIT_REPORT.md
-
-# Audit directly from the interactive shell:
-[You] > !audit /path/to/my_skill
+./audit_agent.py /path/to/my_reasoning_skill/
 ```
-
-See [`AUDIT_PLAYBOOK.md`](AUDIT_PLAYBOOK.md) for the complete 6-Pillar Audit Rubric and platform-by-platform conversion instructions.
