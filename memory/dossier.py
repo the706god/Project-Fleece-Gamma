@@ -28,7 +28,7 @@ Last Updated: {datetime.datetime.now().isoformat()}
 
 ## Executive Facts & Core Entities
 - [Engine]: Project Fleece Gamma (Reasoning Edition) Crate Motor initialized.
-- [Core Model]: Qwen 3.5 9B (8.95B) The Defiant Fable Uncensored Heretic plusIQ-TOOLS (Q6_K MTP).
+- [Core Model]: Qwen 3.5 9B Instruct (Full Q8_0 Precision) with 10 switchable plusIQ modes and Native Metal TurboQuant (65,536-token context).
 - [Memory Model]: Two-tier architecture (L1 Living Dossier + L2 Vectorless PageIndex).
 
 ## Living FAQ & Fast-Path Knowledge Bank

@@ -21,12 +21,11 @@ from typing import Optional, List
 from engine.llm_engine import FleeceEngine, VALID_REASONING_MODES
 from engine.sieve_ocr import ProgressiveOpticalSieve, DocumentOCRResult
 from engine.auditor import FleeceAgentAuditor, AuditReport
-from memory.context_budget import ContextBudgetManager
+from memory.context_budget import ContextBudgetManager, IngestionProtocols
 from memory.markdown_store import LegacyMarkdownStore
 from memory.page_index import PageIndexEngine
 from memory.dossier import LivingDossierEngine
 from memory.state_graph import StateGraphMemoryEngine
-from ingestion.protocols import IngestionProtocols
 
 SYSTEM_DIRECTIVE_GAMMA = """You are an advanced analytical reasoning AI engine powered by Project: Fleece Gamma with the Mimir OCR & Vectorless Memory Stack.
 
@@ -66,7 +65,7 @@ class FleeceCrateMotor:
 
         mem_cfg = self.engine.config.get("memory", {})
         self.memory = ContextBudgetManager(
-            max_context_tokens=mem_cfg.get("max_context_tokens", 16384),
+            max_context_tokens=mem_cfg.get("max_context_tokens", 65536),
             reserved_completion_tokens=mem_cfg.get("reserved_completion_tokens", 4096),
             system_anchor_tokens=mem_cfg.get("system_anchor_tokens", 1200),
             compaction_threshold=mem_cfg.get("memory_compaction_threshold", 0.85),
@@ -189,7 +188,7 @@ def cli():
 
     print("=" * 70)
     print(" Project: Fleece Gamma - Ready (Reasoning Edition | Mimir OCR Active)")
-    print(" Core: Qwen 3.5 9B (8.95B) The Defiant Fable plusIQ-TOOLS (Q6_K MTP)")
+    print(" Core: Qwen 3.5 9B Instruct (Q8_0) + Native Metal TurboQuant (65K Context)")
     print(" Stack: Mimir 3-Pass Optical Sieve + L1 Living Dossier + L2 PageIndex")
     print(f" Active Reasoning Mode: {{REASON:{motor.engine.reasoning_mode}}}")
     print(" Commands:")
@@ -261,7 +260,7 @@ def cli():
                         f"{res.total_latency_ms:.2f} ms, Quarantined={res.quarantined}).\n"
                     )
                 continue
-            if user_in.startswith("!mode"):
+            if user_in.startswith(("!mode", "!reason")):
                 parts = user_in.split(maxsplit=1)
                 if len(parts) < 2:
                     print(

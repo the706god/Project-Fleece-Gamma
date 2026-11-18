@@ -16,8 +16,8 @@ Once these files are downloaded to your computer, Fleece Gamma runs completely o
    - Memory Speed: Uses TurboQuant 4-bit memory packing (turbo4/turbo4) to unlock 65,536 tokens of working memory. If TurboQuant is not supported on your system, it automatically steps down to standard q8_0 memory so it never crashes.
 
 2. Optical Sieve Specialists (Mimir OCR Pass 3)
-   - Specialist Brain: `chandra-ocr-2.Q6_K.gguf`
-   - Specialist Eyes: `chandra-ocr-2.mmproj-f16.gguf`
+   - Specialist Brain: `Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf`
+   - Specialist Eyes: `Qwen2.5-VL-7B-Instruct-mmproj-F16.gguf`
    - What They Do: These files sleep until you feed Gamma a complex, degraded, or handwritten scan that passes 1 and 2 cannot verify. It wakes up on demand, decodes the tough text, and immediately sleeps again to save memory for reasoning.
 
 ---
@@ -43,4 +43,4 @@ This script checks whether the models are already on your computer. If they are 
 - Context Window: 65,536 tokens
 - Reserved Thinking Buffer: 4,096 tokens
 - Default Source: Hugging Face (`unsloth/Qwen3.5-9B-GGUF`)
-- OCR Fallback Model: `chandra-ocr-2.Q6_K.gguf` + `chandra-ocr-2.mmproj-f16.gguf`
+- OCR Fallback Model: `Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf` + `Qwen2.5-VL-7B-Instruct-mmproj-F16.gguf`

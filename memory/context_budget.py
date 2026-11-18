@@ -17,7 +17,7 @@ class ContextBudgetManager:
 
     def __init__(
         self,
-        max_context_tokens: int = 16384,
+        max_context_tokens: int = 65536,
         reserved_completion_tokens: int = 4096,
         system_anchor_tokens: int = 1200,
         compaction_threshold: float = 0.85,
@@ -175,3 +175,22 @@ class ContextBudgetManager:
 
         messages.extend(self.working_history)
         return messages
+
+
+class IngestionProtocols:
+    """
+    Ingestion Protocols for Project: Fleece:
+    Guarantees that raw text is never destructively parsed, retaining tables, code fences, and structure verbatim.
+    """
+
+    def __init__(self, max_block_tokens: int = 8192, token_counter: Optional[Callable[[str], int]] = None):
+        self.max_block_tokens = max_block_tokens
+        self.token_counter = token_counter or (lambda s: len(s.split()) * 4 // 3)
+
+    def anti_parse(self, raw_input: str) -> str:
+        if not raw_input:
+            return ""
+        clean = raw_input.replace("\r\n", "\n").replace("\r", "\n")
+        if clean.count("```") % 2 != 0:
+            clean += "\n```\n"
+        return clean
